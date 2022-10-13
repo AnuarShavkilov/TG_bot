@@ -30,7 +30,7 @@ def get_user_text(message):
 
 def find(message):
     bot.send_message(message.chat.id, 'Начинаю поиск')
-    url = f'https://9v.ru/search?q={message}&lang=ru'
+    url = f'https://9v.ru/search?q={message.text}&lang=ru'
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     quotes = soup.find_all('div', class_='product-preview__content')
