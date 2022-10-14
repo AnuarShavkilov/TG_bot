@@ -1,3 +1,4 @@
+from unicodedata import name
 import telebot
 from telebot import types
 import requests
@@ -35,9 +36,9 @@ def find(message):
     soup = BeautifulSoup(response.text, 'html.parser')
     quotes = soup.find_all('div', class_='product-preview__content')
     for link in quotes:
+        name = link.find('div', class_='product-preview__title').find('a').text
         links = 'https://9v.ru'+link.find('div', class_='product-preview__title').find('a').get('href')
-        bot.send_message(message.chat.id, links)
-        print(links)
+        bot.send_message(message.chat.id, f'{name}\n{links}')
 
 
 @bot.message_handler(content_types=['photo'])
