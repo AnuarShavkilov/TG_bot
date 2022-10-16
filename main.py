@@ -30,7 +30,7 @@ def find(message):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     quotes = soup.find_all('div', class_='product-preview__content')
-    if 'product-preview__content' == '':
+    if quotes != []:
         for link in quotes:
             name = link.find('div', class_='product-preview__title').find('a').text
             links = 'https://9v.ru'+link.find('div', class_='product-preview__title').find('a').get('href')
