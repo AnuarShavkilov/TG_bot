@@ -10,7 +10,11 @@ def start(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     btn1 = types.KeyboardButton("Открыть сайт🌐")
     btn2 = types.KeyboardButton("Найти товар🔎")
-    markup.add(btn1, btn2)
+    btn3 = types.KeyboardButton("Калькулятор резисторов")
+    btn4 = types.KeyboardButton("Наш магазин на OZON")
+    btn5 = types.KeyboardButton("Наш магазин на Wildberries")
+    btn6 = types.KeyboardButton("Наш магазин на Яндекс.Маркет")
+    markup.add(btn1, btn2, btn3, btn4, btn5, btn6)
     hello = f'Привет, {message.from_user.first_name}! Я тестовый бот. Что ты хочешь сделать?'
     bot.send_message(message.chat.id, hello, reply_markup=markup)
 
@@ -21,6 +25,15 @@ def get_user_text(message):
     elif message.text == 'Найти товар🔎':
         msg_find = bot.send_message(message.chat.id, 'Что ищете?')
         bot.register_next_step_handler(msg_find, find)
+    elif message.text == 'Калькулятор резисторов':
+        msg_calc = bot.send_message(message.chat.id, 'Сколько колец на резисторе')
+        # bot.register_next_step_handler(msg_calc, resis_calc)
+    elif message.text == 'Наш магазин на OZON':
+        ozon_site(message)
+    elif message.text == 'Наш магазин на Wildberries':
+        wild_site(message)
+    elif message.text == 'Наш магазин на Яндекс.Маркет':
+        ym_site(message)
     else:
         bot.send_message(message.chat.id, 'Я тебя не понимаю')
 
@@ -37,11 +50,29 @@ def find(message):
             bot.send_message(message.chat.id, f'{name}\n{links}')
     else:
         bot.send_message(message.chat.id, 'К сожалению, ничего не найдено')
-    
+
+    bot.send_message(message.chat.id, 'Если Вы не нашли что искали')
+    website(message)
+    bot.send_message(message.chat.id, 'Или позвоните нам по номеру 📲\n+7(843)259-19-16')
 
 def website(message):
     markup = types.InlineKeyboardMarkup()
     markup.add(types.InlineKeyboardButton('🌐Открыть сайт🌐', url='https://9v.ru'))
     bot.send_message(message.chat.id,'Перейдите на сайт', reply_markup=markup)
+
+def ozon_site(message):
+    markup = types.InlineKeyboardMarkup()
+    markup.add(types.InlineKeyboardButton('OZON', url='https://www.ozon.ru/seller/radio-tochka-21003'))
+    bot.send_message(message.chat.id,'⬇ Магазин ⬇', reply_markup=markup)
+
+def wild_site(message):
+    markup = types.InlineKeyboardMarkup()
+    markup.add(types.InlineKeyboardButton('Wildberries', url='https://www.wildberries.ru/brands/9vru'))
+    bot.send_message(message.chat.id,'⬇ Магазин ⬇', reply_markup=markup)
+
+def ym_site(message):
+    markup = types.InlineKeyboardMarkup()
+    markup.add(types.InlineKeyboardButton('Яндекс.Маркет', url='https://market.yandex.ru/business--radio-tochka-rf-9v-ru/932565'))
+    bot.send_message(message.chat.id,'⬇ Магазин ⬇', reply_markup=markup)
 
 bot.polling()
