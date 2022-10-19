@@ -128,7 +128,7 @@ else:
 if 1000 < fourth_ring(result_res) < 1000000:
     kom = fourth_ring(result_res)/1000
     print(f'Номинальное сопротивление = {kom} кОм\nТочность = {last_ring()} %')
-elif fourth_ring(result_res)() > 1000000:
+elif fourth_ring(result_res) > 1000000:
     mom = fourth_ring(result_res)/1000000
     print(f'Номинальное сопротивление = {mom} МОм\nТочность = {last_ring()} %')
 else:
