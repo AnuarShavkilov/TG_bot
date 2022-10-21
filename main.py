@@ -11,10 +11,7 @@ def start(message):
     btn1 = types.KeyboardButton("Открыть сайт🌐")
     btn2 = types.KeyboardButton("Найти товар🔎")
     btn3 = types.KeyboardButton("Калькулятор резисторов")
-    btn4 = types.KeyboardButton("Наш магазин на OZON")
-    btn5 = types.KeyboardButton("Наш магазин на Wildberries")
-    btn6 = types.KeyboardButton("Наш магазин на Яндекс.Маркет")
-    markup.add(btn1, btn2, btn3, btn4, btn5, btn6)
+    markup.add(btn1, btn2, btn3)
     hello = f'Привет, {message.from_user.first_name}! Я тестовый бот. Что ты хочешь сделать?'
     bot.send_message(message.chat.id, hello, reply_markup=markup)
 
@@ -22,18 +19,15 @@ def start(message):
 def get_user_text(message):
     if message.text == 'Открыть сайт🌐':
         website(message)
+        ozon_site(message)
+        wild_site(message)
+        ym_site(message)
     elif message.text == 'Найти товар🔎':
         msg_find = bot.send_message(message.chat.id, 'Что ищете?')
         bot.register_next_step_handler(msg_find, find)
     elif message.text == 'Калькулятор резисторов':
         msg_calc = bot.send_message(message.chat.id, 'Сколько колец на резисторе')
         # bot.register_next_step_handler(msg_calc, resis_calc)
-    elif message.text == 'Наш магазин на OZON':
-        ozon_site(message)
-    elif message.text == 'Наш магазин на Wildberries':
-        wild_site(message)
-    elif message.text == 'Наш магазин на Яндекс.Маркет':
-        ym_site(message)
     else:
         bot.send_message(message.chat.id, 'Я тебя не понимаю')
 
