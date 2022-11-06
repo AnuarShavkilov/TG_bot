@@ -69,4 +69,5 @@ def ym_site(message):
     markup.add(types.InlineKeyboardButton('Яндекс.Маркет', url='https://market.yandex.ru/business--radio-tochka-rf-9v-ru/932565'))
     bot.send_message(message.chat.id,'⬇ Магазин ⬇', reply_markup=markup)
 
+
 bot.polling()
