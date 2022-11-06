@@ -1,7 +1,7 @@
 import telebot
 from telebot import types
-import requests
-from bs4 import BeautifulSoup
+from pars import find_text
+# from resistor import ring_count, first_ring, second_ring, third_ring, fourth_ring, last_ring
 
 bot = telebot.TeleBot('5643787535:AAFxdHmSYvUXhlNRWg4kpbTlhtYBwRelzoU')
 
@@ -32,13 +32,10 @@ def get_user_text(message):
         bot.send_message(message.chat.id, 'Я тебя не понимаю')
 
 def find(message):
-    bot.send_message(message.chat.id, 'Начинаю поиск')
-    url = f'https://9v.ru/search?q={message.text}&lang=ru'
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    quotes = soup.find_all('div', class_='product-preview__content')
-    if quotes != []:
-        for link in quotes:
+    result_pars = find_text(message)
+
+    if result_pars != []:
+        for link in result_pars:
             name = link.find('div', class_='product-preview__title').find('a').text
             links = 'https://9v.ru'+link.find('div', class_='product-preview__title').find('a').get('href')
             bot.send_message(message.chat.id, f'{name}\n{links}')
@@ -69,5 +66,10 @@ def ym_site(message):
     markup.add(types.InlineKeyboardButton('Яндекс.Маркет', url='https://market.yandex.ru/business--radio-tochka-rf-9v-ru/932565'))
     bot.send_message(message.chat.id,'⬇ Магазин ⬇', reply_markup=markup)
 
+# def resis_calc(message):
+#     colors = ['коричневый', 'красный', 'оранжевый', 'желтый', 'зеленый',
+#               'голубой', 'фиолетовый', 'серый', 'белый', 'черный',
+#               'золотистый', 'серебристый']
+#     n = message.text
 
 bot.polling()
