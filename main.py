@@ -94,6 +94,7 @@ def second(message):
     #     bot.register_next_step_handler(message, fourth)
     # print(resistor)
 
+
 def third(message):
     third = message.text
     resistor.append(third)
