@@ -1,15 +1,23 @@
-n = int(input('Введите кол-во колец\n'))
+
 colors = ['коричневый', 'красный', 'оранжевый', 'желтый', 'зеленый',
           'голубой', 'фиолетовый', 'серый', 'белый', 'черный',
           'золотистый', 'серебристый']
-first = input('Выберите цвет первого кольца\n')
-second = input('Выберите цвет второго кольца\n')
-if n == 5:
-    third = input('Выберите цвет третьего кольца\n')
-    fourth = input('Выберите цвет четвертого кольца\n')
-else:
-    fourth = input('Выберите цвет третьего кольца\n')
-last = input('Выберите цвет последнего кольца\n')
+
+def ring_count(resistor):
+    global n, first, second, third, fourth, last
+    n = resistor[0]
+    first = resistor[1]
+    second = resistor[2]
+    # if len(resistor) == 6:
+    third = resistor[3]
+    fourth = resistor[4]
+    last = resistor[5]
+    # elif len(resistor) == 5:
+    #     fourth = resistor[3]
+    #     last = resistor[4]
+
+    resultate = calcul()
+    return resultate
 
 def first_ring():
     count_fir = 0
@@ -120,16 +128,18 @@ def last_ring():
 
     return(proc)
 
-if n == 5:
+def calcul():
+    # if n == 5:
     result_res = str(first_ring()) + str(second_ring()) + str(third_ring())
-else:
-    result_res = str(first_ring()) + str(second_ring())
+    # elif n == 4:
+    #     result_res = str(first_ring()) + str(second_ring())
 
-if 1000 < fourth_ring(result_res) < 1000000:
-    kom = fourth_ring(result_res)/1000
-    print(f'Номинальное сопротивление = {kom} кОм\nТочность = {last_ring()} %')
-elif fourth_ring(result_res) > 1000000:
-    mom = fourth_ring(result_res)/1000000
-    print(f'Номинальное сопротивление = {mom} МОм\nТочность = {last_ring()} %')
-else:
-    print(f'Номинальное сопротивление = {fourth_ring(result_res)} Ом\nТочность = {last_ring()} %')
+    if 1000 < fourth_ring(result_res) < 1000000:
+        kom = fourth_ring(result_res)/1000
+        result_calcul = (f'Номинальное сопротивление = {kom} кОм\nТочность = {last_ring()} %')
+    elif fourth_ring(result_res) > 1000000:
+        mom = fourth_ring(result_res)/1000000
+        result_calcul = (f'Номинальное сопротивление = {mom} МОм\nТочность = {last_ring()} %')
+    else:
+        result_calcul = (f'Номинальное сопротивление = {fourth_ring(result_res)} Ом\nТочность = {last_ring()} %')
+    return result_calcul
