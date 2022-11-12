@@ -85,20 +85,18 @@ def first(message):
 def second(message):
     second = message.text
     resistor.append(second)
-    # print(resistor)
+    # if ring_counter == 5:
     bot.send_message(message.from_user.id, 'Введите цвет третьего кольца')
     bot.register_next_step_handler(message, third)
-    # if resistor[0] == 5:
-    #     bot.register_next_step_handler(message, third)
-    # elif resistor[0] == 4:
+    # elif ring_counter == 4:
+    #     bot.send_message(message.from_user.id, 'Введите цвет третьего кольца')
     #     bot.register_next_step_handler(message, fourth)
-    # print(resistor)
+
 
 
 def third(message):
     third = message.text
     resistor.append(third)
-    # bot.send_message(message.from_user.id, 'Введите цвет последнего кольца')
     bot.send_message(message.from_user.id, 'Введите цвет четвертого кольца')
     bot.register_next_step_handler(message, fourth)
 
@@ -111,7 +109,6 @@ def fourth(message):
 def last(message):
     last = message.text
     resistor.append(last)
-    print(resistor)
     resultate = ring_count(resistor)
 
     bot.send_message(message.from_user.id, resultate)

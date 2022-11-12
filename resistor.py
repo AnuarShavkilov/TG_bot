@@ -8,11 +8,11 @@ def ring_count(resistor):
     n = resistor[0]
     first = resistor[1]
     second = resistor[2]
-    # if len(resistor) == 6:
+    # if n == 5:
     third = resistor[3]
     fourth = resistor[4]
     last = resistor[5]
-    # elif len(resistor) == 5:
+    # elif n == 4:
     #     fourth = resistor[3]
     #     last = resistor[4]
 
